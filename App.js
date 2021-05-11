@@ -10,16 +10,21 @@ import Card from "./app/components/Card";
 import ListingDetailsScreen from "./app/screens/ListingDetailsScreen";
 import MessagesScreen from "./app/screens/MessagesScreen";
 import AccountScreen from "./app/screens/AccountScreen";
+import colors from "./app/config/colors";
+import ListingsScreen from "./app/screens/ListingsScreen";
+import AccountListItem from "./app/components/AccountListItem";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <AccountScreen/>
+      <AccountListItem/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: colors.light,
+    flex: 1,
   },
 });

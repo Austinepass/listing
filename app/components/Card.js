@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
+import { ImageBackground, StyleSheet, Text, View, Image, Platform } from "react-native";
 import colors from "../config/colors";
 
 export default function Card({ title, subtitle, image }) {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   view: {
     height: 300,
     width: 400,
-    margin: 30,
+    margin: 12,
     borderRadius: 15,
     backgroundColor: "#fff",
     overflow: 'hidden',
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 7,
-    fontFamily: "Avenir",
+    fontFamily: Platform.OS==='ios'?"Avenir":'Roboto',
     fontSize: 18,
     fontWeight: "400",
   },
