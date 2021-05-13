@@ -13,18 +13,28 @@ import AccountScreen from "./app/screens/AccountScreen";
 import colors from "./app/config/colors";
 import ListingsScreen from "./app/screens/ListingsScreen";
 import AccountListItem from "./app/components/AccountListItem";
+import AppTextInput from "./app/components/AppTextInput";
+import AppPicker from "./app/components/AppPicker";
+import Screen from "./app/components/Screen";
+
+const categories = [
+  {label: 'Furniture', value: 1},
+  {label: 'Clothing', value: 2},
+  {label: 'Cameras', value: 3},
+]
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <AccountListItem/>
-    </View>
+    <Screen style={styles.container}>
+      <AppPicker placeholder='Category' icon='apps'/>
+      <AppTextInput placeholder='Email' icon='email'/>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.light,
+    //backgroundColor: colors.light,
     flex: 1,
   },
 });
