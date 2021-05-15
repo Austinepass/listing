@@ -10,7 +10,7 @@ export default function AppText({ children }) {
 
   const styles = StyleSheet.create({
     text: {
-      fontSize: 50,
+      fontSize: 10,
       color: "tomato",
     },
   });

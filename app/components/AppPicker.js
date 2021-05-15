@@ -1,11 +1,22 @@
 import React, { useState } from "react";
-import { TextInput, View, StyleSheet, Platform, Text, TouchableWithoutFeedback, Modal, Button, FlatList } from "react-native";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Platform,
+  Text,
+  TouchableWithoutFeedback,
+  Modal,
+  Button,
+  FlatList,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import Screen from "./Screen";
+import PickerItem from "./PickerItem";
 
-function AppPicker({ icon, placeholder, items }) {
-          const [modalVisible, setModalVisible] = useState(false);
+function AppPicker({ icon, placeholder, items, selectedItem, onSelectItem }) {
+  const [modalVisible, setModalVisible] = useState(false);
   return (
     <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
@@ -18,7 +29,9 @@ function AppPicker({ icon, placeholder, items }) {
               style={styles.icon}
             />
           )}
-          <Text style={styles.text}>{placeholder}</Text>
+          <Text style={styles.text}>
+            {selectedItem ? selectedItem.label : placeholder}
+          </Text>
           <MaterialCommunityIcons
             name='chevron-down'
             size={20}
@@ -27,13 +40,22 @@ function AppPicker({ icon, placeholder, items }) {
         </View>
       </TouchableWithoutFeedback>
       <Modal visible={modalVisible} animationType='slide'>
-          <Screen>
-              <Button title='Close' onPress={() => setModalVisible(false)}/>
-              <FlatList
-              data={items}
-              keyExtractor={item => item.value.toString()}
+        <Screen>
+          <Button title='Close' onPress={() => setModalVisible(false)} />
+          <FlatList
+            data={items}
+            keyExtractor={(item) => item.value.toString()}
+            renderItem={({ item }) => (
+              <PickerItem
+                label={item.label}
+                onPress={() => {
+                  setModalVisible(false);
+                  onSelectItem(item);
+                }}
               />
-          </Screen>
+            )}
+          />
+        </Screen>
       </Modal>
     </>
   );
@@ -51,7 +73,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   text: {
-      flex: 1,
+    flex: 1,
   },
   textInput: {
     color: colors.dark,
@@ -59,4 +81,4 @@ const styles = StyleSheet.create({
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
 });
-export default AppPicker;
+export default AppPicker; 
