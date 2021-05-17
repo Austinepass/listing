@@ -19,6 +19,7 @@ function AppPicker({
 	icon,
 	PickerItemComponent = PickerItem,
 	placeholder,
+	numberOfColumns=1,
 	items,
 	selectedItem,
 	onSelectItem,
@@ -52,6 +53,7 @@ function AppPicker({
 				<Screen>
 					<Button title='Close' onPress={() => setModalVisible(false)} />
 					<FlatList
+						numColumns={numberOfColumns}
 						data={items}
 						keyExtractor={(item) => item.value.toString()}
 						renderItem={({ item }) => (
