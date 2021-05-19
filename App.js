@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -7,10 +7,11 @@ import {
   Image,
   Platform,
   SafeAreaView,
+  Button,
 } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import MessagesScreen from "./app/screens/MessagesScreen";
-import ListingEditScreen from "./app/screens/ListingEditScreen";
+import Screen from "./app/components/Screen";
+import ImageInput from "./app/components/ImageInput";
+import ImageInputList from "./app/components/ImageInputList";
 
 const categories = [
   { label: "Furniture", value: 1 },
@@ -19,10 +20,26 @@ const categories = [
 ];
 
 export default function App() {
-  const [category, setCategory] = useState('Category');
+  //const [category, setCategory] = useState('Category');
+  const [imageUris, setImageUris] = useState([]);
+
+  const handleAdd = uri => {
+    setImageUris([...imageUris, uri])
+  }
+  const handleDelete = uri => {
+		setImageUris(imageUris.filter(imageUri => imageUri !== uri));
+	};
+
   return (
-    <ListingEditScreen/>
-  );
+		<Screen>
+			<ImageInputList
+				imageUris={imageUris}
+				//onAddImage={(uri) => handleAdd(uri)}
+				onAddImage={handleAdd}
+        onRemoveImage={handleDelete}
+			/>
+		</Screen>
+	);
 }
 
 const styles = StyleSheet.create({
