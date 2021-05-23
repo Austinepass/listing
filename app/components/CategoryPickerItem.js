@@ -1,15 +1,18 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import colors from '../config/colors'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 
 function CategoryPickerItem({item, onPress}) {
     return (
 			<View style={styles.container}>
-				<View style={[styles.icon, { backgroundColor: item.backgroundColor }]}>
-					<MaterialCommunityIcons name={item.icon} size={40} color='white' />
-				</View>
-				<Text style={styles.text}>{item.label}</Text>
+				<TouchableOpacity onPress={onPress}>
+					<View
+						style={[styles.icon, { backgroundColor: item.backgroundColor }]}>
+						<MaterialCommunityIcons name={item.icon} size={40} color='white' />
+					</View>
+					<Text style={styles.text}>{item.label}</Text>
+				</TouchableOpacity>
 			</View>
 		);
 }
@@ -18,6 +21,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 30,
 		paddingVertical: 15,
 		alignItems: "center",
+		justifyContent: 'center',
         width:'33%',
 	},
 	icon: {
@@ -30,7 +34,6 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		marginTop: 10,
-		marginLeft: 10,
 		fontSize: 17,
 		fontWeight: "500",
         textAlign:'center',

@@ -12,32 +12,14 @@ import {
 import Screen from "./app/components/Screen";
 import ImageInput from "./app/components/ImageInput";
 import ImageInputList from "./app/components/ImageInputList";
+import ListingEditScreen from "./app/screens/ListingEditScreen";
 
-const categories = [
-  { label: "Furniture", value: 1 },
-  { label: "Clothing", value: 2 },
-  { label: "Cameras", value: 3 },
-];
 
 export default function App() {
-  //const [category, setCategory] = useState('Category');
-  const [imageUris, setImageUris] = useState([]);
-
-  const handleAdd = uri => {
-    setImageUris([...imageUris, uri])
-  }
-  const handleDelete = uri => {
-		setImageUris(imageUris.filter(imageUri => imageUri !== uri));
-	};
 
   return (
 		<Screen>
-			<ImageInputList
-				imageUris={imageUris}
-				//onAddImage={(uri) => handleAdd(uri)}
-				onAddImage={handleAdd}
-        onRemoveImage={handleDelete}
-			/>
+			<ListingEditScreen/>
 		</Screen>
 	);
 }
