@@ -4,7 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import Screen from '../components/Screen'
 import Card from "../components/Card";
 
-function ListingsScreen(props) {
+function ListingsScreen({navigation}) {
   const myCards = [
     {
       id: 1,
@@ -22,16 +22,21 @@ function ListingsScreen(props) {
   ];
   const [cards, setCards] = useState(myCards);
   return (
-      <Screen>
-          <FlatList
-            data={cards}
-            keyExtractor={(cd) => cd.id.toString()}
-            renderItem={({ item }) => (
-              <Card title={item.title} subtitle={item.subtitle} image={item.image} />
-            )}
-          />
-      </Screen>
-  );
+		<Screen>
+			<FlatList
+				data={cards}
+				keyExtractor={(cd) => cd.id.toString()}
+				renderItem={({ item }) => (
+					<Card
+						title={item.title}
+						subtitle={item.subtitle}
+						image={item.image}
+						onPress={() => navigation.navigate("ListingsDetails", item)}
+					/>
+				)}
+			/>
+		</Screen>
+	);
 }
 
 export default ListingsScreen;

@@ -3,12 +3,12 @@ import { SafeAreaView, StyleSheet, Platform, StatusBar, View } from 'react-nativ
 function Screen({children, style}) {
     return (
 			<SafeAreaView styles={[styles.screen, style]}>
-				<View styles={{flex: 1, backgroundColor: 'yellow'}}>{children}</View>
+				<View styles={{flex: 1}}>{children}</View>
 			</SafeAreaView>
 		);
 }
 const styles = StyleSheet.create({
-  screen: {
+  screen:{
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     flex: 1,
   },

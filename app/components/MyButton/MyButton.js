@@ -19,10 +19,11 @@ export default function MyButton({ text, onPress, color="primary"}) {
 
 const styles = StyleSheet.create({
   view: {
-        borderRadius: 20,
+        borderRadius: 25,
         justifyContent: "center",
         width: "100%",
         padding: 15,
+        margin: 7,
         alignItems: "center",
       }, 
 

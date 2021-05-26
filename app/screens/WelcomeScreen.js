@@ -1,64 +1,57 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
+import { ImageBackground, StyleSheet, View, Image, Text } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import MyButton from "../components/MyButton/MyButton";
 
-const image = {
-  uri:
-    "/Users/mac/Desktop/React-Native-apps/exerc/exerc/app/assets/background.jpg",
-};
-const logo = {
-  uri:
-    "/Users/mac/Desktop/React-Native-apps/exerc/exerc/app/assets/logo-red.png",
-};
-
-export default function WelcomeScreen() {
-  return (
-    <ImageBackground source={image} style={styles.image} blurRadius={9}>
-      <View style={styles.logoContainer}>
-        <Image
-          source={logo}
-          style={{
-            width: 100,
-            height: 100,
-          }}
-        />
-        <Text style={styles.text}>Sell What You Don't Need</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <MyButton text='Login' />
-      </View>
-      <View style={styles.buttonContainer}>
-        <MyButton text='Register' color='secondary' />
-      </View>
-      <StatusBar style='auto' />
-    </ImageBackground>
-  );
+function WelcomeScreen({navigation}) {
+	return (
+		<ImageBackground
+			blurRadius={10}
+			style={styles.background}
+			source={require("../assets/background.jpg")}>
+			<View style={styles.logoContainer}>
+				<Image style={styles.logo} source={require("../assets/logo-red.png")} />
+				<Text style={styles.tagline}>Sell What You Don't Need</Text>
+			</View>
+			<View style={styles.buttonsContainer}>
+				<MyButton text='Login' onPress={() => navigation.navigate("Login")} />
+				<MyButton
+					text='Register'
+					color='secondary'
+					onPress={() => navigation.navigate("Register")}
+				/>
+			</View>
+		</ImageBackground>
+	);
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  buttonContainer: {
-    width: "100%",
-    padding: 20,
-  },
-  image: {
-    flex: 1,
-    width: "100%",
-    justifyContent: "flex-end",
-    alignItems: "center",
-  },
-  logoContainer: {
-    top: 100,
-    position: "absolute",
-    alignItems: "center",
-  },
-  text: {
-    paddingVertical: 20,
-    fontSize: 25,
-    fontWeight: "600",
-  },
+	background: {
+		flex: 1,
+		justifyContent: "flex-end",
+		alignItems: "center",
+	},
+	buttonsContainer: {
+		padding: 20,
+		width: "100%",
+	},
+	logo: {
+		width: 100,
+		height: 100,
+	},
+	logoContainer: {
+		position: "absolute",
+		top: 70,
+		alignItems: "center",
+	},
+	tagline: {
+		fontSize: 25,
+		fontWeight: "600",
+		paddingVertical: 20,
+
+	},
 });
+
+export default WelcomeScreen;

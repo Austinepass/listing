@@ -1,21 +1,19 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import colors from '../config/colors';
 
-function AccountListItem({name, size, color, backGround, text}) {
+function AccountListItem({name, size, color, backGround, text, onPress}) {
     return (
-       <View style={styles.container}>
-           <View style={[styles.icon, {backgroundColor: backGround}]}>
-           <MaterialCommunityIcons
-           name={name}
-           size={30}
-           color='white'
-           />
-           </View>
-           <Text style={styles.text}>{text}</Text>
-       </View>
-    );
+			<TouchableWithoutFeedback onPress={onPress}>
+				<View style={styles.container}>
+					<View style={[styles.icon, { backgroundColor: backGround }]}>
+						<MaterialCommunityIcons name={name} size={30} color='white' />
+					</View>
+					<Text style={styles.text}>{text}</Text>
+				</View>
+			</TouchableWithoutFeedback>
+		);
 }
 const styles = StyleSheet.create({
     container: {

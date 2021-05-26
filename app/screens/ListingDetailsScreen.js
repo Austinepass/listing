@@ -1,26 +1,27 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
 
-import Card from "../components/Card";
 import ListItem from "../components/ListItem";
 import colors from "../config/colors";
 
-function ListingDetailsScreen(props) {
+function ListingDetailsScreen({route}) {
+  const listing = route.params
   return (
-    <View>
-      <Image style={styles.image} source={require("../assets/jacket.jpg")} />
-      <View style={styles.detailsContainer}>
-        <Text style={styles.title}>Red jacket for sale!</Text>
-        <Text style={styles.subtitle}>$100</Text>
-      </View>
-      <View style={styles.userContainer}>
-      <ListItem 
-      title='Moshi Whatever' 
-      subtitle='5 Listings'
-      image={require('../assets/mosh.jpg')} />
-      </View>
-      </View>
-  );
+		<View>
+			<Image style={styles.image} source={listing.image} />
+			<View style={styles.detailsContainer}>
+				<Text style={styles.title}>{listing.title}</Text>
+				<Text style={styles.subtitle}>{listing.subtitle}</Text>
+			</View>
+			<View style={styles.userContainer}>
+				<ListItem
+					title='Moshi Whatever'
+					subtitle='5 Listings'
+					image={require("../assets/mosh.jpg")}
+				/>
+			</View>
+		</View>
+	);
 }
 
 export default ListingDetailsScreen;
