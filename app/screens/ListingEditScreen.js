@@ -4,6 +4,7 @@ import { AppForm, AppFormField, SubmitButton } from "../components/form";
 import * as Yup from "yup";
 import Screen from "../components/Screen";
 import AppFormPicker from "../components/form/AppFormPicker";
+import listingApi from '../api/listings'
 import CategoryPickerItem from "../components/CategoryPickerItem";
 import FormImagePicker from "../components/form/FormImagePicker";
 import useLocation from "../hooks/useLocation";
@@ -75,6 +76,14 @@ const categories = [
 
 function ListingEditScreen(props) {
 	const location = useLocation()
+
+	const handleSubmit = async (listing) => {
+		const response = await listingApi.addListing({ ...listing, location}, 
+			progress => console.log(progress));
+		if (!response.ok) return alert('Could not save the listing')
+		alert('Success!')
+		
+	}
 	return (
 		<Screen>
 			<View style={styles.container}>
@@ -87,7 +96,7 @@ function ListingEditScreen(props) {
 						description: "",
 						images: [],
 					}}
-					onSubmit={(values) => console.log(location)}>
+					onSubmit={handleSubmit}>
 					<FormImagePicker name='images' />
 					<AppFormField
 						autoCapitalize='none'

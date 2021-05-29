@@ -1,37 +1,39 @@
-import React, { useState } from "react";
-import { FlatList } from "react-native-gesture-handler";
+import React, { useEffect, useState,  } from "react";
+import { FlatList, Text, } from "react-native";
 
-import Screen from '../components/Screen'
+import Screen from "../components/Screen";
 import Card from "../components/Card";
+import listingApi from "../api/listings";
+import routes from "../navigation/routes";
+import MyButton from "../components/MyButton/MyButton";
+import ActivityIndicator from "../components/ActivityIndicator";
+import useApi from "../hooks/useApi";
 
-function ListingsScreen({navigation}) {
-  const myCards = [
-    {
-      id: 1,
-      image: require("../assets/jacket.jpg"),
-      title: "Red jacket for sale!",
-      subtitle: "$100",
-    },
-    {
-      id: 2,
-      image: require("../assets/couch.jpg"),
-      title: "Couch in good condition",
-      subtitle: "$1000",
-    },
-    
-  ];
-  const [cards, setCards] = useState(myCards);
-  return (
+function ListingsScreen({ navigation }) {
+const {data: listings, error, loading, request: loadListings} = useApi(listingApi.getListings());
+
+	useEffect(() => {
+		loadListings();
+	}, []);
+
+	return (
 		<Screen>
+			{error && (
+				<>
+					<Text style={{margin: 10, fontSize: 18, alignSelf: 'center'}}>Couldn't retrieve the listings</Text>
+					<MyButton text='Retry' onPress={loadListings} />
+				</>
+			)}
+      <ActivityIndicator visible={loading}/>
 			<FlatList
-				data={cards}
+				data={listings}
 				keyExtractor={(cd) => cd.id.toString()}
 				renderItem={({ item }) => (
 					<Card
 						title={item.title}
-						subtitle={item.subtitle}
-						image={item.image}
-						onPress={() => navigation.navigate("ListingsDetails", item)}
+						subtitle={"$" + item.price}
+						imageUrl={item.images[0].url}
+						onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
 					/>
 				)}
 			/>
