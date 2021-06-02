@@ -1,14 +1,20 @@
 import React from "react";
-import { ImageBackground, StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
+import { Image } from "react-native-expo-image-cache";
 import ListItem from "../components/ListItem";
 import colors from "../config/colors";
 
-function ListingDetailsScreen({route}) {
-  const listing = route.params
-  return (
+function ListingDetailsScreen({ route }) {
+	const listing = route.params;
+	return (
 		<View>
-			<Image style={styles.image} source={listing.image} />
+			<Image
+				style={styles.image}
+				preview={{ uri: listing.images[0].thumbnailUrl }}
+				tint='light'
+				uri={listing.images[0].url}
+			/>
 			<View style={styles.detailsContainer}>
 				<Text style={styles.title}>{listing.title}</Text>
 				<Text style={styles.subtitle}>{listing.subtitle}</Text>
@@ -26,28 +32,28 @@ function ListingDetailsScreen({route}) {
 
 export default ListingDetailsScreen;
 const styles = StyleSheet.create({
-  detailsContainer: {
-    padding: 20,
-  },
-  title: {
-    marginBottom: 7,
-    fontFamily: "Avenir",
-    fontSize: 24,
-    fontWeight: "400",
-  },
-  subtitle: {
-    color: colors.secondary,
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  image: {
-    width: "100%",
-    height: 300,
-  },
-  view: {
-    backgroundColor: "#f8f4f4",
-  },
-  userContainer: {
-    marginVertical: 40,
-  }
+	detailsContainer: {
+		padding: 20,
+	},
+	title: {
+		marginBottom: 7,
+		fontFamily: "Avenir",
+		fontSize: 24,
+		fontWeight: "400",
+	},
+	subtitle: {
+		color: colors.secondary,
+		fontSize: 20,
+		fontWeight: "bold",
+	},
+	image: {
+		width: "100%",
+		height: 300,
+	},
+	view: {
+		backgroundColor: "#f8f4f4",
+	},
+	userContainer: {
+		marginVertical: 40,
+	},
 });

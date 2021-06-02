@@ -33,6 +33,7 @@ const {data: listings, error, loading, request: loadListings} = useApi(listingAp
 						title={item.title}
 						subtitle={"$" + item.price}
 						imageUrl={item.images[0].url}
+            thumbnailUrl={item.images[0].thumbnailUrl}
 						onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
 					/>
 				)}
