@@ -34,7 +34,7 @@ function AccountScreen({navigation}) {
           <ListItem
             title={user.name}
             subtitle={user.email}
-            image={require("../assets/mosh.jpg")}
+            image={require("../assets/aust.jpeg")}
             renderRightActions={() => console.log()}
           />
           <AccountListItem

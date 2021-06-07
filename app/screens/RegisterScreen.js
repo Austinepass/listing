@@ -18,17 +18,17 @@ const validationSchema = Yup.object().shape({
 function RegisterScreen(props) {
 	const auth = useAuth();
 	const [error, setError] = useState();
-	const regiterApi = useApi(userApi.register);
+	const registerApi = useApi(userApi.register);
 	const loginApi = useApi(authApi.login);
-
 	const handleSubmit = async (userInfo) => {
-		const result = await regiterApi.request(userInfo);
+		const result = await registerApi.request(userInfo);
 
 		if (!result.ok) {
-			if (result.data) setError(result.data.error)
+			if (result.data) setError(result.data.error);
 			else {
 				setError("An Unexpected error occured.");
 				console.log(result);
+				
 			}
 			return;
 		}
@@ -42,7 +42,6 @@ function RegisterScreen(props) {
 	return (
 		<Screen>
 			<View style={styles.container}>
-				<ActivityIndicator visible={regiterApi.loading || loginApi.loading}/>
 				<AppForm
 					validationSchema={validationSchema}
 					initialValues={{ email: "", password: "", name: "" }}
@@ -74,6 +73,8 @@ function RegisterScreen(props) {
 						textContentType='password'
 					/>
 					<SubmitButton title='Register' />
+						<ActivityIndicator visible={registerApi.loading || loginApi.loading}/>
+
 				</AppForm>
 			</View>
 		</Screen>
