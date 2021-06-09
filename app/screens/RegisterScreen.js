@@ -40,50 +40,52 @@ function RegisterScreen(props) {
 		auth.logIn(authToken);
 	};
 	return (
-		<Screen>
-			<View style={styles.container}>
-				<AppForm
-					validationSchema={validationSchema}
-					initialValues={{ email: "", password: "", name: "" }}
-					onSubmit={handleSubmit}>
-					<ErrorMessage error={error} visible={error} />
-					<AppFormField
-						autoCapitalize='none'
-						autoCorrect={false}
-						icon='account'
-						name='name'
-						placeholder='Name'
-					/>
-					<AppFormField
-						autoCapitalize='none'
-						autoCorrect={false}
-						icon='email'
-						name='email'
-						keyboardType='email-address'
-						placeholder='Email'
-						textContentType='emailAddress'
-					/>
-					<AppFormField
-						autoCapitalize='none'
-						autoCorrect={false}
-						icon='lock'
-						name='password'
-						placeholder='Password'
-						secureTextEntry={true}
-						textContentType='password'
-					/>
-					<SubmitButton title='Register' />
-						<ActivityIndicator visible={registerApi.loading || loginApi.loading}/>
-
-				</AppForm>
-			</View>
-		</Screen>
+		<>
+			<ActivityIndicator visible={registerApi.loading || loginApi.loading} />
+			<Screen>
+				<View style={styles.container}>
+					<AppForm
+						validationSchema={validationSchema}
+						initialValues={{ email: "", password: "", name: "" }}
+						onSubmit={handleSubmit}>
+						<ErrorMessage error={error} visible={error} />
+						<AppFormField
+							autoCapitalize='none'
+							autoCorrect={false}
+							icon='account'
+							name='name'
+							placeholder='Name'
+						/>
+						<AppFormField
+							autoCapitalize='none'
+							autoCorrect={false}
+							icon='email'
+							name='email'
+							keyboardType='email-address'
+							placeholder='Email'
+							textContentType='emailAddress'
+						/>
+						<AppFormField
+							autoCapitalize='none'
+							autoCorrect={false}
+							icon='lock'
+							name='password'
+							placeholder='Password'
+							secureTextEntry={true}
+							textContentType='password'
+						/>
+						<SubmitButton title='Register' />
+					</AppForm>
+				</View>
+			</Screen>
+		</>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
 		padding: 10,
+		flex: 1
 	},
 });
 

@@ -11,6 +11,7 @@ import AppNavigator from "./app/navigation/AppNavigator";
 import OfflineNotice from "./app/components/OfflineNotice";
 import AuthContext from "./app/auth/context";
 import authStorage from "./app/auth/storage";
+import * as Notifications from "expo-notifications";
 import {AppLoading} from 'expo-app-loading'
 export default function App() {
 	const [user, setUser] = useState();
@@ -23,6 +24,7 @@ export default function App() {
 	useEffect(() => {
 		restoreUser();
 	}, [])
+
 
 	//if (!isReady) 
 		//return <AppLoading startAsync={restoreToken} onFinish={() => setIsReady(true)}/>

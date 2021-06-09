@@ -18,6 +18,8 @@ const getListingsApi = useApi(listingApi.getListings);
 	}, []);
 
 	return (
+		<>
+			<ActivityIndicator visible={loading}/>
 		<Screen>
 			{getListingsApi.error && (
 				<>
@@ -25,7 +27,6 @@ const getListingsApi = useApi(listingApi.getListings);
 					<MyButton text='Retry' onPress={loadListings} />
 				</>
 			)}
-      <ActivityIndicator visible={loading}/>
 			<FlatList
 				data={getListingsApi.data}
 				keyExtractor={(cd) => cd.id.toString()}
@@ -40,6 +41,7 @@ const getListingsApi = useApi(listingApi.getListings);
 				)}
 			/>
 		</Screen>
+		</>
 	);
 }
 
